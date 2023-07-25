@@ -2,7 +2,6 @@ package com.jianastrero.templateandroidapp
 
 import android.app.Application
 import android.content.pm.ApplicationInfo
-import android.util.Log
 import timber.log.Timber
 
 class MyApplication : Application() {
