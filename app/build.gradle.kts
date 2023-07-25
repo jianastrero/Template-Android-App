@@ -62,6 +62,7 @@ dependencies {
     implementation("androidx.core:core-ktx:$androidXCore")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifecycle")
     implementation("androidx.activity:activity-compose:$androidXActivityCompose")
+    implementation("androidx.navigation:navigation-compose:$androidXNavComposeVersion")
 
     // Compose Dependencies
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
