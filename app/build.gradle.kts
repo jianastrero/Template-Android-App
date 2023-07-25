@@ -21,8 +21,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+        }
         release {
-            isMinifyEnabled = false
+            isDebuggable = false // Disable this if you want to debug
+            isMinifyEnabled = true // Disable this if you want to debug
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -58,6 +62,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     // Unit Test Dependencies
     testImplementation("junit:junit:4.13.2")
