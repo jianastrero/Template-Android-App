@@ -1,3 +1,10 @@
+val androidXCore: String by project
+val androidXLifecycle: String by project
+val androidXActivityCompose: String by project
+val androidXNavComposeVersion: String by project
+val composeBomVersion: String by project
+val timberVersion: String by project
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -52,19 +59,19 @@ android {
 
 dependencies {
     // Main AndroidX Dependencies
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.core:core-ktx:$androidXCore")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifecycle")
+    implementation("androidx.activity:activity-compose:$androidXActivityCompose")
 
     // Compose Dependencies
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
     // Timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.jakewharton.timber:timber:$timberVersion")
 
     // Unit Test Dependencies
     testImplementation("junit:junit:4.13.2")
