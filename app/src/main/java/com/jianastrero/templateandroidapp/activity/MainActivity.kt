@@ -1,4 +1,4 @@
-package com.jianastrero.templateandroidapp.activities
+package com.jianastrero.templateandroidapp.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
