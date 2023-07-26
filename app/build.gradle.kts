@@ -3,6 +3,7 @@ val androidXCoreVersion: String by project
 val androidXLifecycleVersion: String by project
 val androidXActivityComposeVersion: String by project
 val androidXNavComposeVersion: String by project
+val androidXSplashScreenVersion: String by project
 val composeBomVersion: String by project
 val timberVersion: String by project
 val daggerHiltVersion: String by project
@@ -75,6 +76,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifecycleVersion")
     implementation("androidx.activity:activity-compose:$androidXActivityComposeVersion")
     implementation("androidx.navigation:navigation-compose:$androidXNavComposeVersion")
+    implementation("androidx.core:core-splashscreen:$androidXSplashScreenVersion")
 
     // Compose Dependencies
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
