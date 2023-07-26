@@ -20,10 +20,14 @@ This is a template Android app that uses Jetpack Compose and Kotlin. Basic Andro
 3. Click "Create repository from template".
 4. Clone the repository.
 5. Open the project in Android Studio.
-6. Change the package name.
-7. Change the app name.
-8. Change the app icon.
-9. Change the app colors.
+6. Customize the app to your liking.
+    - Change the package name.
+    - Change the app name.
+    - Change the app icon.
+    - Change the app colors.
+    - Change the app theme.
+    - Change the app fonts.
+    - Change the app splash screen.
 
 ## [License](LICENSE)
 ```
