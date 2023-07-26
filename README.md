@@ -7,7 +7,7 @@
 
 
 ## Description
-This is a template Android app that uses Jetpack Compose and Kotlin.
+This is a template Android app that uses Jetpack Compose and Kotlin. Basic Android app Template using Jetpack Compose and follows SOLID and DDD principles.
 
 ## Technologies
 * Android
