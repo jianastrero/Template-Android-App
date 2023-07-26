@@ -2,8 +2,10 @@ package com.jianastrero.templateandroidapp
 
 import android.app.Application
 import android.content.pm.ApplicationInfo
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class MyApplication : Application() {
 
     private val isDebuggable: Boolean
