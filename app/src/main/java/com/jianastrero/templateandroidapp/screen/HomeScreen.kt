@@ -13,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jianastrero.templateandroidapp.ui.theme.TemplateAndroidAppTheme
+import com.jianastrero.templateandroidapp.util.checkStringLength
 import com.jianastrero.templateandroidapp.viewmodel.domain.IHomeViewModel
 import com.jianastrero.templateandroidapp.viewmodel.implementation.HomeViewModel
 
@@ -32,6 +35,11 @@ fun HomeScreen(
     viewModel: IHomeViewModel = viewModel<HomeViewModel>()
 ) {
     val state by viewModel.state.collectAsState()
+    val messageIsValid by remember(state.message) {
+        derivedStateOf {
+            checkStringLength(state.message, 10)
+        }
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,6 +63,7 @@ fun HomeScreen(
             onValueChange = {
                 viewModel.updateState(state.copy(message = it))
             },
+            isError = state.message.isNotEmpty() && !messageIsValid,
             label = { Text("Message") },
             modifier = Modifier.fillMaxWidth(0.8f)
         )
@@ -70,6 +79,7 @@ fun HomeScreen(
             onClick = {
                 onNextClick(state.message, state.value)
             },
+            enabled = state.message.isNotEmpty() && messageIsValid,
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
             Text(
