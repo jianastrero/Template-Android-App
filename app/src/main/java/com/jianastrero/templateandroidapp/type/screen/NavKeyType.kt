@@ -5,11 +5,21 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import kotlin.reflect.KClass
 
+/**
+ * Interface representing a navigation key type.
+ *
+ * @param T the type of value associated with the navigation key
+ */
 interface NavKeyType<T : Any> {
     val key: String
     val type: KClass<T>
 }
 
+/**
+ * Converts the [NavKeyType] to a [NavArgument] with the appropriate type.
+ *
+ * @return the converted [NavArgument]
+ */
 fun NavKeyType<*>.toNavArgument() = navArgument(key) {
     type = when (this@toNavArgument.type) {
         Boolean::class -> NavType.BoolType
@@ -25,6 +35,14 @@ fun NavKeyType<*>.toNavArgument() = navArgument(key) {
     }
 }
 
+/**
+ * Converts a value stored in a [Bundle] to the appropriate type specified by [NavKeyType].
+ *
+ * @param navArguments The [Bundle] that contains the navigation arguments.
+ *
+ * @return The value retrieved from [navArguments] converted to the appropriate type specified by [NavKeyType].
+ * If the specified type is not supported, it will return an empty [String].
+ */
 fun NavKeyType<*>.fromNavArgument(navArguments: Bundle): Any {
     return when (type) {
         Boolean::class -> navArguments.getBoolean(key)
