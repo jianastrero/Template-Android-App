@@ -22,4 +22,6 @@ class HomeViewModel @Inject constructor(
         _state.value = state
     }
 
+    override fun isMessageValid(): Boolean = _state.value.message.length >= 10
+
 }
