@@ -13,7 +13,6 @@ import com.jianastrero.templateandroidapp.extension.navigate
 import com.jianastrero.templateandroidapp.model.detail.DetailArguments
 import com.jianastrero.templateandroidapp.screen.DetailScreen
 import com.jianastrero.templateandroidapp.screen.HomeScreen
-import timber.log.Timber
 
 @Composable
 fun MainNavGraph(navController: NavHostController = rememberNavController()) {
@@ -26,7 +25,6 @@ fun MainNavGraph(navController: NavHostController = rememberNavController()) {
                 modifier = Modifier
                     .fillMaxSize()
                     .clickable {
-                        Timber.d("Navigating to Detail Screen")
                         navController.navigate(
                             Screen.Detail,
                             arguments = mapOf(
