@@ -1,6 +1,5 @@
 package com.jianastrero.templateandroidapp.navgraph
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,17 +21,17 @@ fun MainNavGraph(navController: NavHostController = rememberNavController()) {
     ) {
         composable(Screen.Home.route) {
             HomeScreen(
+                onNextClick = { message, value ->
+                    navController.navigate(
+                        Screen.Detail,
+                        arguments = mapOf(
+                            Screen.Detail.TITLE to message,
+                            Screen.Detail.VALUE to value
+                        )
+                    )
+                },
                 modifier = Modifier
                     .fillMaxSize()
-                    .clickable {
-                        navController.navigate(
-                            Screen.Detail,
-                            arguments = mapOf(
-                                Screen.Detail.TITLE to "From Home Screen",
-                                Screen.Detail.VALUE to 0.69f
-                            )
-                        )
-                    }
             )
         }
         composable(Screen.Detail.route, Screen.Detail.namedNavArguments) {
