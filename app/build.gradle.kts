@@ -12,6 +12,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -25,7 +26,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.jianastrero.templateandroidapp.runner.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -97,6 +98,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$daggerHiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:$daggerHiltVersion")
 
     // Debug Dependencies
     debugImplementation("androidx.compose.ui:ui-tooling")
