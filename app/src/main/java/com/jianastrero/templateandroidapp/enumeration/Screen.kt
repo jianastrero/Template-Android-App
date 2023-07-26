@@ -7,8 +7,6 @@ import com.jianastrero.templateandroidapp.type.screen.Parameter
 import com.jianastrero.templateandroidapp.type.screen.argument
 import com.jianastrero.templateandroidapp.type.screen.fromNavArgument
 import com.jianastrero.templateandroidapp.type.screen.toNavArgument
-import java.net.URLEncoder
-import java.nio.charset.Charset
 
 sealed class Screen(route: String) {
 
@@ -56,7 +54,7 @@ sealed class Screen(route: String) {
             navRoute += "/"
 
             this.arguments.forEachIndexed { index, argument ->
-                navRoute += URLEncoder.encode(arguments[argument].toString(), Charset.defaultCharset().name())
+                navRoute += arguments[argument].toString()
 
                 if (index != this.arguments.size - 1) {
                     navRoute += "/"
@@ -66,7 +64,7 @@ sealed class Screen(route: String) {
 
         if (parameters.isNotEmpty()) {
             navRoute += "?${parameters.entries.joinToString("&") {
-                "${it.key}=${URLEncoder.encode(it.value.toString(), Charset.defaultCharset().name())}"
+                "${it.key}=${it.value}"
             }}"
         }
 
