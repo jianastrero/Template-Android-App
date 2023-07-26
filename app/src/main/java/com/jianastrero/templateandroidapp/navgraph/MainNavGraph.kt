@@ -38,6 +38,7 @@ fun MainNavGraph(navController: NavHostController = rememberNavController()) {
             val detailArguments = Screen.Detail.getValues<DetailArguments>(it, DetailArguments())
             DetailScreen(
                 detailArguments = detailArguments,
+                onBackClick = { navController.popBackStack() },
                 modifier = Modifier.fillMaxSize()
             )
         }

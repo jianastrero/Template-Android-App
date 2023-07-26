@@ -1,10 +1,15 @@
 package com.jianastrero.templateandroidapp.screen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,35 +25,42 @@ import com.jianastrero.templateandroidapp.ui.theme.TemplateAndroidAppTheme
 @Composable
 fun DetailScreen(
     detailArguments: DetailArguments,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(
-                horizontal = 12.dp,
-                vertical = 64.dp
+    Box(modifier = modifier) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(
+                    horizontal = 12.dp,
+                    vertical = 64.dp
+                )
+                .then(modifier)
+        ) {
+            Text(
+                text = "Detail Screen",
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.headlineLarge,
             )
-            .then(modifier)
-    ) {
-        Text(
-            text = "Detail Screen",
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.headlineLarge,
-        )
-        Spacer(modifier = Modifier.height(64.dp))
-        DetailItem(
-            title = "Message",
-            value = detailArguments.title,
-            modifier = Modifier.fillMaxWidth()
-        )
-        DetailItem(
-            title = "Value",
-            value = detailArguments.value,
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = 12.dp)
-        )
+            Spacer(modifier = Modifier.height(64.dp))
+            DetailItem(
+                title = "Message",
+                value = detailArguments.title,
+                modifier = Modifier.fillMaxWidth()
+            )
+            DetailItem(
+                title = "Value",
+                value = detailArguments.value,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp)
+            )
+        }
+        IconButton(onClick = onBackClick) {
+            Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "Back")
+        }
     }
 }
 
@@ -56,6 +68,9 @@ fun DetailScreen(
 @Composable
 private fun DetailScreenPreview() {
     TemplateAndroidAppTheme {
-        DetailScreen(DetailArguments("Hello world!", 0.696969f))
+        DetailScreen(
+            DetailArguments("Hello world!", 0.696969f),
+            onBackClick = {}
+        )
     }
 }
