@@ -1,12 +1,17 @@
 package com.jianastrero.templateandroidapp.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.animation.AnticipateInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.animation.doOnEnd
 import com.jianastrero.templateandroidapp.navgraph.MainNavGraph
 import com.jianastrero.templateandroidapp.ui.theme.TemplateAndroidAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +29,9 @@ class MainActivity : ComponentActivity(), ViewTreeObserver.OnPreDrawListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setSplashScreenAnimation()
+
         setContent {
             TemplateAndroidAppTheme {
                 MainNavGraph()
@@ -41,12 +49,48 @@ class MainActivity : ComponentActivity(), ViewTreeObserver.OnPreDrawListener {
         }
     }
 
-    override fun onPreDraw(): Boolean {
-        return if (System.currentTimeMillis() > splashScreenTimerStart + SPLASH_SCREEN_DURATION) {
+    override fun onPreDraw(): Boolean =
+        if (System.currentTimeMillis() > splashScreenTimerStart + SPLASH_SCREEN_DURATION) {
             content.viewTreeObserver.removeOnPreDrawListener(this)
             true
         } else {
             false
+        }
+
+    private fun setSplashScreenAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen.setOnExitAnimationListener { splashScreenView ->
+                val scaleY = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.SCALE_Y,
+                    1f,
+                    1.5f
+                )
+                val scaleX = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.SCALE_X,
+                    1f,
+                    1.5f
+                )
+                val fade = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.ALPHA,
+                    1f,
+                    0f
+                )
+
+                val animationSet = AnimatorSet().apply {
+                    interpolator = AnticipateInterpolator()
+                    duration = 500L
+                }
+
+                animationSet.doOnEnd { splashScreenView.remove() }
+                animationSet
+                    .play(scaleX)
+                    .with(scaleY)
+                    .with(fade)
+                animationSet.start()
+            }
         }
     }
 
