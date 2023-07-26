@@ -1,9 +1,11 @@
 package com.jianastrero.templateandroidapp.enumeration
 
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
 import com.jianastrero.templateandroidapp.type.screen.Argument
 import com.jianastrero.templateandroidapp.type.screen.Parameter
 import com.jianastrero.templateandroidapp.type.screen.argument
+import com.jianastrero.templateandroidapp.type.screen.fromNavArgument
 import com.jianastrero.templateandroidapp.type.screen.toNavArgument
 import java.net.URLEncoder
 import java.nio.charset.Charset
@@ -69,6 +71,18 @@ sealed class Screen(route: String) {
         }
 
         return navRoute
+    }
+
+    inline fun <reified T> getValues(backStackEntry: NavBackStackEntry, defaultValue: T): T {
+        val navArguments = backStackEntry.arguments ?: return defaultValue
+
+        val constructor = T::class.constructors.firstOrNull() ?: return defaultValue
+
+        val values = (arguments + parameters).map {
+            it.fromNavArgument(navArguments)
+        }
+
+        return constructor.call(*values.toTypedArray())
     }
 
     object Home : Screen("home")
