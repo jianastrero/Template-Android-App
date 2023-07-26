@@ -1,8 +1,10 @@
 package com.jianastrero.templateandroidapp.enumeration
 
-import com.jianastrero.templateandroidapp.type.Argument
-import com.jianastrero.templateandroidapp.type.Parameter
-import com.jianastrero.templateandroidapp.type.argument
+import androidx.navigation.NamedNavArgument
+import com.jianastrero.templateandroidapp.type.screen.Argument
+import com.jianastrero.templateandroidapp.type.screen.Parameter
+import com.jianastrero.templateandroidapp.type.screen.argument
+import com.jianastrero.templateandroidapp.type.screen.toNavArgument
 import java.net.URLEncoder
 import java.nio.charset.Charset
 
@@ -28,13 +30,18 @@ sealed class Screen(route: String) {
             return completeRoute
         }
 
+    val namedNavArguments: List<NamedNavArgument>
+        get() = (arguments + parameters).map {
+            it.toNavArgument()
+        }
+
     fun getRoute(
         arguments: Map<Argument<*>, Any> = emptyMap(),
         parameters: Map<Parameter<*>, Any> = emptyMap()
     ): String {
         var navRoute = _route
 
-        if (arguments.entries.size != this.arguments.size || arguments.keys != this.arguments.map { it.key }) {
+        if (arguments.entries.size != this.arguments.size || arguments.keys != this.arguments.toSet()) {
             throw Exception("Arguments size mismatch")
         }
 
