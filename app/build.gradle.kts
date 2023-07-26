@@ -1,6 +1,7 @@
-val androidXCore: String by project
-val androidXLifecycle: String by project
-val androidXActivityCompose: String by project
+val kotlinVersion: String by project
+val androidXCoreVersion: String by project
+val androidXLifecycleVersion: String by project
+val androidXActivityComposeVersion: String by project
 val androidXNavComposeVersion: String by project
 val composeBomVersion: String by project
 val timberVersion: String by project
@@ -65,10 +66,13 @@ kapt {
 }
 
 dependencies {
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+
     // Main AndroidX Dependencies
-    implementation("androidx.core:core-ktx:$androidXCore")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifecycle")
-    implementation("androidx.activity:activity-compose:$androidXActivityCompose")
+    implementation("androidx.core:core-ktx:$androidXCoreVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$androidXLifecycleVersion")
+    implementation("androidx.activity:activity-compose:$androidXActivityComposeVersion")
     implementation("androidx.navigation:navigation-compose:$androidXNavComposeVersion")
 
     // Compose Dependencies
