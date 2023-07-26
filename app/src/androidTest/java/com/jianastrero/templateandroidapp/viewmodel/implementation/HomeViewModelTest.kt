@@ -24,4 +24,18 @@ class HomeViewModelTest {
         viewmodel.updateState(newState)
         assert(viewmodel.state.value == newState)
     }
+
+    @Test
+    fun invalidMessageTest() {
+        val newState = HomeState("abc")
+        viewmodel.updateState(newState)
+        assert(!viewmodel.isMessageValid())
+    }
+
+    @Test
+    fun validMessageTest() {
+        val newState = HomeState("Hello World!")
+        viewmodel.updateState(newState)
+        assert(viewmodel.isMessageValid())
+    }
 }
